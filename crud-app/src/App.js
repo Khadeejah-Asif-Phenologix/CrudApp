@@ -11,7 +11,7 @@ function App() {
       <Routes>
           <Route exact path='/' element={<Form/>}></Route>
           <Route exact path='/read' element={<Read/>}></Route>
-          <Route exact path='/update' element={<Update/>}></Route>
+          <Route exact path='/update/:id' element={<Update/>}></Route>
       </Routes>
     </BrowserRouter>
     </div>

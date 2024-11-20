@@ -37,7 +37,7 @@ const Read = () => {
   useEffect(()=>
   {
     getData();
-  },[Data])
+  },[])
   
   return (
     <>
@@ -56,14 +56,13 @@ const Read = () => {
         </thead>
         {Data.map((eachData)=>{
           return(
-            <>
-              <tbody>
+              <tbody key={eachData.id}>
                 <tr>
                   <th scope="row">{eachData.id}</th>
                   <td>{eachData.name}</td>
                   <td>{eachData.email}</td>
                   <td>
-                    <Link to='/update'>
+                    <Link to={`/update/${eachData.id}`}>
                     <button className='btn btn-success' onClick={()=>setLocalStorage(eachData.id,eachData.name,eachData.email)}>Edit</button>
                     </Link>
                   </td>
@@ -72,7 +71,6 @@ const Read = () => {
                   </td>
                 </tr>
               </tbody>
-            </>
           )
         })}
       </table> 
