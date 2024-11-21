@@ -5,12 +5,11 @@ import Delete from "../Delete/Delete";
 
 const Read = () => {
   const [Data, setData] = useState([]);
-
+  
   const getData = () => {
     axios
       .get("https://673df2580118dbfe86097ea0.mockapi.io/crud-app/crud-app")
       .then((response) => {
-        console.log(response.data);
         setData(response.data);
       })
       .catch((error) => {

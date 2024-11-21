@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function Delete({ id, deleteData }) {
+export default function Delete({ id, deleteData }) 
+{
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = () => {
@@ -26,7 +27,6 @@ export default function Delete({ id, deleteData }) {
     <button
       className="btn btn-danger"
       onClick={handleDelete}
-      disabled={isDeleting}
     >
       {isDeleting ? "Deleting..." : "Delete"}
     </button>
