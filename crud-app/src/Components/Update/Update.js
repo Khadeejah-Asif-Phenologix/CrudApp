@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import '../Form/Form.css';
-import {useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
-const Update = () => {
+const Update = () => 
+{
   const[Id, setId] = useState(0);
   const [Name , setName] = useState('');
   const [Email, setEmail] = useState('');
