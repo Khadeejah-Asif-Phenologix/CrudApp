@@ -10,9 +10,19 @@ const Form = () => {
   const header = {"Access-Control-Allow-Origin":"*"};
   const history = useNavigate();
 
-  const handleSubmit = (e) =>{
+  const isValidEmail = (email)=> {
+     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     return emailRegex.test(email);
+   };
+
+  const handleSubmit = (e) =>{   
       e.preventDefault();
       console.log('clicked');
+
+      if (!isValidEmail(Email)) {
+        alert("Please enter a valid email address!");
+        return;
+      } 
 
       if (Name === "" || Email ==="")
       {

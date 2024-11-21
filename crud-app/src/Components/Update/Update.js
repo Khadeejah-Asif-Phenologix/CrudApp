@@ -16,8 +16,25 @@ const Update = () =>
     setEmail(localStorage.getItem("Email"));
   },[])
 
+  const isValidEmail = (email)=> {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleUpdate  = (e) =>{
     e.preventDefault();
+
+    if (!isValidEmail(Email)) {
+      alert("Please enter a valid email address!");
+      return;
+    } 
+
+    if (Name === "" || Email ==="")
+    {
+      alert("Please fill the required fields");
+      return;
+    }
+
     axios.put(`https://673df2580118dbfe86097ea0.mockapi.io/crud-app/crud-app/${Id}`,{
         name : Name,
         email : Email
