@@ -1,49 +1,38 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Delete from "../Delete/Delete";
 
 const Read = () => {
-  const [Data, setData]= useState([]);
-  
-  function getData() 
-  {
-    axios.get('https://673df2580118dbfe86097ea0.mockapi.io/crud-app/crud-app')
-    .then(response =>{
-      console.log(response.data);
-      setData(response.data);
-    })
-    .catch(error =>{
-      console.log(error);
-    })
-  }
+  const [Data, setData] = useState([]);
 
-  const setLocalStorage = (Id, Name, Email) =>
-    {
-      localStorage.setItem("Id",Id);
-      localStorage.setItem("Name",Name);
-      localStorage.setItem("Email",Email);
-    }
+  const getData = () => {
+    axios
+      .get("https://673df2580118dbfe86097ea0.mockapi.io/crud-app/crud-app")
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
 
-  function handleDelete(id){
-    axios.delete(`https://673df2580118dbfe86097ea0.mockapi.io/crud-app/crud-app/${id}`)
-    .then(()=>{
-      getData();
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
-  }
+  const setLocalStorage = (Id, Name, Email) => {
+    localStorage.setItem("Id", Id);
+    localStorage.setItem("Name", Name);
+    localStorage.setItem("Email", Email);
+  };
 
-  useEffect(()=>
-  {
+  useEffect(() => {
     getData();
-  },[])
-  
+  }, []);
+
   return (
     <>
-    <div className='d-flex justify-content-center bg-danger text-white p-3'>
-    <h2>Read - CRUD Page</h2>
-    </div>
+      <div className="d-flex justify-content-center bg-danger text-white p-3">
+        <h2>Read - CRUD Page</h2>
+      </div>
       <table className="table table-hover">
         <thead>
           <tr>
@@ -54,31 +43,42 @@ const Read = () => {
             <th scope="col">Delete</th>
           </tr>
         </thead>
-        {Data.map((eachData)=>{
-          return(
-              <tbody key={eachData.id}>
-                <tr>
-                  <th scope="row">{eachData.id}</th>
-                  <td>{eachData.name}</td>
-                  <td>{eachData.email}</td>
-                  <td>
-                    <Link to={`/update/${eachData.id}`}>
-                    <button className='btn btn-success' onClick={()=>setLocalStorage(eachData.id,eachData.name,eachData.email)}>Edit</button>
-                    </Link>
-                  </td>
-                  <td>
-                    <button className='btn btn-danger' onClick={()=>handleDelete(eachData.id)}>Delete</button>
-                  </td>
-                </tr>
-              </tbody>
-          )
-        })}
-      </table> 
-      <div className='logout-button align-self-end m-5'>
-        <Link to='/'><button className='btn btn-dark'>LogOut</button></Link>
+        <tbody>
+          {Data.map((eachData) => (
+            <tr key={eachData.id}>
+              <th scope="row">{eachData.id}</th>
+              <td>{eachData.name}</td>
+              <td>{eachData.email}</td>
+              <td>
+                <Link to={`/update/${eachData.id}`}>
+                  <button
+                    className="btn btn-success"
+                    onClick={() =>
+                      setLocalStorage(
+                        eachData.id,
+                        eachData.name,
+                        eachData.email
+                      )
+                    }
+                  >
+                    Edit
+                  </button>
+                </Link>
+              </td>
+              <td>
+                <Delete id={eachData.id} deleteData={getData} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="logout-button align-self-end m-5">
+        <Link to="/">
+          <button className="btn btn-dark">LogOut</button>
+        </Link>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Read
+export default Read;
