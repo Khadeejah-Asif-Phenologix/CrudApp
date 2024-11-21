@@ -31,7 +31,7 @@ const Update = () =>
 
     if (Name === "" || Email ==="")
     {
-      alert("Please fill the required fields");
+      alert("Fill Kro.");
       return;
     }
 
